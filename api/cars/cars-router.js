@@ -1,6 +1,6 @@
 const express = require('express');
 const CARS = require('./cars-model');
-const { checkCarId } = require('./cars-middleware');
+const { checkCarId, checkCarPayload } = require('./cars-middleware');
 
 const router = express.Router();
 
@@ -23,8 +23,14 @@ router.get('/:id', checkCarId, async (request, response, next) => {
           next(error)
      }
 })
-router.post('/', (request, response, next) => {
-     console.log('post endpoint')
+router.post('/', checkCarPayload, async (request, response, next) => {
+     try {
+          const car = await CARS.create(request.body)
+          response.status(200).json(car)
+     }
+     catch (error) {
+          next(error)
+     }
 })
 // router.put('/', (request, response, next) => {
 //      console.log('update endpoint')

@@ -10,7 +10,12 @@ exports.checkCarId = async (request, response, next) => {
 }
 
 exports.checkCarPayload = (request, response, next) => {
-     // DO YOUR MAGIC
+     const { vin, make, model, mileage } = request.body
+     if (!vin) { return next({ status: 400, message: "vin is missing" }) }
+     else if (!make) { return next({ status: 400, message: "make is missing" }) }
+     else if (!model) { return next({ status: 400, message: "model is missing" }) }
+     else if (!mileage) { return next({ status: 400, message: "mileage is missing" }) }
+     else { next() }
 }
 
 exports.checkVinNumberValid = (request, response, next) => {
