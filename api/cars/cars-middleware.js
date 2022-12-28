@@ -1,15 +1,22 @@
-const checkCarId = (req, res, next) => {
-  // DO YOUR MAGIC
+const db = require('../../data/db-config');
+exports.checkCarId = async (request, response, next) => {
+     const carId = await db('cars').where('id', request.params.id).first()
+     if (!carId) {
+          next({ status: 404, message: `car with id ${request.params.id} is not found` })
+     }
+     else {
+          next()
+     }
 }
 
-const checkCarPayload = (req, res, next) => {
-  // DO YOUR MAGIC
+exports.checkCarPayload = (request, response, next) => {
+     // DO YOUR MAGIC
 }
 
-const checkVinNumberValid = (req, res, next) => {
-  // DO YOUR MAGIC
+exports.checkVinNumberValid = (request, response, next) => {
+     // DO YOUR MAGIC
 }
 
-const checkVinNumberUnique = (req, res, next) => {
-  // DO YOUR MAGIC
+exports.checkVinNumberUnique = (request, response, next) => {
+     // DO YOUR MAGIC
 }
