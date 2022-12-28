@@ -5,7 +5,7 @@ exports.up = function (knex) {
           tbl.string('vin', 17).unique().notNullable(); //unique and required
           tbl.string('make').notNullable() // required
           tbl.string('model').notNullable() // required
-          tbl.numeric('mileage').notNullable() // required
+          tbl.integer('mileage').notNullable() // required
           tbl.string('title') // optional
           tbl.string('transmission') // optional
      })
